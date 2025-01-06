@@ -1,0 +1,19 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "tslib": [ "./node_modules/tslib/tslib.d.ts" ]
+    },
+
+    "jsx": "react",
+    "lib": [ "dom", "dom.iterable", "esnext" ],
+    "outDir": "../.destination",
+    "rootDir": ".",
+    "target": "ES2021",
+    "tsBuildInfoFile": "../.cache/tsbuildinfo.library.json"
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}

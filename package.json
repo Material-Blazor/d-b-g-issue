@@ -1,0 +1,87 @@
+{
+  "name": "materia-technologies-inc.reactcomponents",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "npm": ">=10.9.0",
+    "pnpm": "Please use npm to install this package",
+    "yarn": "Please use npm to install this package"
+  },
+  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321",
+  "scripts": {
+    "build": "wireit"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tslib": "^2.8.1"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-replace": "^6.0.2",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.3",
+    "@types/react-dom": "^19.0.2",
+    "dts-bundle-generator": "^9.5.1",
+    "rollup": "^4.30.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-summary": "^3.0.0",
+    "typescript": "^5.7.2",
+    "wireit": "^0.14.9"
+  },
+  "wireit": {
+    "build": {
+      "dependencies": [
+        "generate-types"
+      ]
+    },
+    "build-library": {
+      "command": "tsc --project Components/tsconfig.json",
+      "clean": "if-file-deleted",
+      "files": [
+        "./tsconfig.json",
+        "./Components/tsconfig.json",
+        "Components/**/*.ts",
+        "Components/**/*.tsx"
+      ],
+      "output": [
+        ".destination/**/*.js"
+      ]
+    },
+    "build-rollup": {
+      "command": "rollup --config rollup.mjs",
+      "dependencies": [
+        "build-library"
+      ],
+      "files": [
+        "Components/**/*.ts",
+        ".destination/**/*.js",
+        "rollup.mjs"
+      ],
+      "output": [
+        ".rollup/cjs/react-components.js",
+        ".rollup/cjs/react-components.js.map",
+        ".rollup/esm/react-components.js",
+        ".rollup/esm/react-components.js.map"
+      ]
+    },
+    "generate-types": {
+      "command": "dts-bundle-generator --project tsconfig.json --out-file .rollup/react-components.d.ts Components/ReactComponents.ts ",
+      "dependencies": [
+        "build-rollup"
+      ],
+      "files": [
+        "Components/**/*.ts"
+      ],
+      "output": [
+        ".rollup/react-components.d.ts"
+      ]
+    }
+  }
+}
