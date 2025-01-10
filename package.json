@@ -33,7 +33,10 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-summary": "^3.0.0",
     "typescript": "^5.7.2",
-    "wireit": "^0.14.9"
+    "wireit": "^0.14.9",
+
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.7"
   },
   "wireit": {
     "build": {
